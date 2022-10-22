@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const connection = require("./db");
 const express = require("express");
 const app = express();
+var cors = require('cors')
 
 let gfs;
 connection();
@@ -14,7 +15,7 @@ conn.once("open", function () {
     gfs = Grid(conn.db, mongoose.mongo);
     gfs.collection("photos");
 });
-
+app.use(cors())
 app.use("/file", upload);
 
 // media routes
